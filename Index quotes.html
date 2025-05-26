@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, maximum-scale=5.0">
+    <title>TBPN Quote Bank - The Future of Tech Wisdom</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0f1a0f 100%);
+            color: #00ff88;
+            min-height: 100vh;
+            overflow-x: hidden;
+            -webkit-text-size-adjust: 100%;
+            -ms-text-size-adjust: 100%;
+        }
+        
+        /* Animated background grid */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid #00ff88;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 136, 0.2), transparent);
+            animation: scanline 3s linear infinite;
+        }
+        
+        @keyframes scanline {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 0 20px #00ff88;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header .subtitle {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Main container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        
+        /* Quote card */
+        .quote-card {
+            background: rgba(0, 0, 0, 0.7);
+            border: 2px solid #00ff88;
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+            box-shadow: 
+                0 0 30px rgba(0, 255, 136, 0.3),
+                inset 0 1px 0 rgba(0, 255, 136, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #00ff88, transparent);
+            animation: borderGlow 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+        
+        .quote-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 10px 40px rgba(0, 255, 136, 0.4),
+                inset 0 1px 0 rgba(0, 255, 136, 0.3);
+        }
+        
+        .quote-text {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+        
+
+        
+        .quote-author {
+            text-align: right;
+            font-weight: 600;
+            color: #66ff99;
+            font-size: 1rem;
+        }
+        
+        /* Source embeds */
+        .source-embed {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff88;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(10px);
+        }
+        
+        .source-embed h4 {
+            color: #00ff88;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .youtube-embed iframe {
+            border-radius: 8px;
+            background: #000;
+            width: 100%;
+            height: 300px;
+        }
+        
+        .twitter-embed {
+            text-align: center;
+        }
+        
+        .web-preview {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .web-preview:hover {
+            background: rgba(0, 255, 136, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .web-icon {
+            font-size: 1.5rem;
+            min-width: 2rem;
+        }
+        
+        .web-text {
+            font-weight: 500;
+            color: #00ff88;
+        }
+        
+        .web-url {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            word-break: break-all;
+        }
+        
+        /* Navigation */
+        .navigation {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .nav-btn {
+            background: rgba(0, 255, 136, 0.1);
+            border: 2px solid #00ff88;
+            color: #00ff88;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+        }
+        
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(0, 255, 136, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 136, 0.5);
+            transform: translateY(-2px);
+        }
+        
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .page-info {
+            color: #66ff99;
+            font-weight: 500;
+        }
+        
+        /* Loading animation */
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem;
+        }
+        
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(0, 255, 136, 0.3);
+            border-radius: 50%;
+            border-top-color: #00ff88;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Stats display */
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #00ff88;
+            text-shadow: 0 0 10px #00ff88;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header .subtitle {
+                font-size: 0.8rem;
+            }
+            
+            .header {
+                padding: 1.5rem 1rem;
+            }
+            
+            .container {
+                padding: 0 0.5rem;
+            }
+            
+            .quote-card {
+                padding: 1.2rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .quote-text {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+            
+            .quote-author {
+                font-size: 0.9rem;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem 0.5rem;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                padding: 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 0.8rem;
+                margin: 0.8rem 0;
+            }
+            
+            .source-embed {
+                padding: 1rem;
+                margin-bottom: 0.8rem;
+            }
+            
+            .source-embed h4 {
+                font-size: 0.9rem;
+            }
+            
+            .youtube-embed iframe {
+                height: 180px;
+            }
+            
+            .web-preview {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+                padding: 0.8rem;
+            }
+            
+            .web-url {
+                font-size: 0.7rem;
+                max-width: 100%;
+                overflow-wrap: break-word;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 0.7rem;
+                line-height: 1.3;
+            }
+            
+            .quote-card {
+                padding: 1rem;
+            }
+            
+            .quote-text {
+                font-size: 0.95rem;
+                line-height: 1.4;
+            }
+            
+            .quote-author {
+                font-size: 0.8rem;
+            }
+            
+            .nav-btn {
+                padding: 0.8rem;
+                font-size: 0.8rem;
+            }
+            
+            .page-info {
+                font-size: 0.9rem;
+            }
+            
+            .stat-number {
+                font-size: 1.2rem;
+            }
+            
+            .stat-label {
+                font-size: 0.7rem;
+            }
+            
+            .youtube-embed iframe {
+                height: 160px;
+            }
+            
+            .source-embed {
+                padding: 0.8rem;
+            }
+        }
+        
+        /* Landscape mobile orientation */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .navigation {
+                flex-direction: row;
+                gap: 0.5rem;
+            }
+            
+            .nav-btn {
+                width: auto;
+                flex: 1;
+                padding: 0.8rem 1rem;
+            }
+            
+            .stats {
+                flex-direction: row;
+                gap: 1rem;
+            }
+            
+            .youtube-embed iframe {
+                height: 200px;
+            }
+        }
+        
+        /* Touch-friendly improvements */
+        @media (hover: none) and (pointer: coarse) {
+            .nav-btn {
+                min-height: 48px;
+                font-size: 1rem;
+            }
+            
+            .quote-card {
+                touch-action: manipulation;
+            }
+            
+            .web-preview {
+                min-height: 48px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    
+    <header class="header">
+        <h1>TBPN QUOTE BANK</h1>
+        <p class="subtitle">The Temple of Technology // The Fortress of Finance // The Capital of Capital</p>
+    </header>
+    
+    <div class="container">
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number" id="totalQuotes">--</div>
+                <div class="stat-label">Total Quotes</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number" id="currentQuote">--</div>
+                <div class="stat-label">Current Quote</div>
+            </div>
+        </div>
+        
+        <div id="quoteContainer">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+            </div>
+        </div>
+        
+        <nav class="navigation">
+            <button class="nav-btn" id="prevBtn" onclick="previousQuote()">← PREVIOUS</button>
+            <span class="page-info" id="pageInfo">Loading...</span>
+            <button class="nav-btn" id="nextBtn" onclick="nextQuote()">NEXT →</button>
+        </nav>
+    </div>
+
+    <script>
+        let quotesData = [];
+        let currentIndex = 0;
+        
+        // Configuración
+        const SHEET_ID = '1psAfk2Oe966XeNpBi_UCE7gjRCfGhV1yz0QhpaFOCYM';
+        
+        // Función para parsear el texto y extraer quote, author y link
+        function parseQuoteText(text) {
+            // Buscar patrón: "texto" [Author (date)](link)
+            const regex = /^(.*?)\s*\[([^\]]+)\]\((https?:\/\/[^\)]+)\)\s*$/;
+            const match = text.match(regex);
+            
+            if (match) {
+                return {
+                    text: match[1].trim().replace(/^[""]|[""]$/g, ''), // Quitar comillas del inicio/final
+                    author: match[2].trim(),
+                    link: match[3].trim()
+                };
+            }
+            
+            // Si no coincide con el patrón, buscar solo el link al final
+            const linkRegex = /(.*?)\s*(https?:\/\/\S+)\s*$/;
+            const linkMatch = text.match(linkRegex);
+            
+            if (linkMatch) {
+                return {
+                    text: linkMatch[1].trim(),
+                    author: 'Unknown',
+                    link: linkMatch[2].trim()
+                };
+            }
+            
+            // Si no hay link, solo devolver el texto
+            return {
+                text: text.trim(),
+                author: 'Unknown',
+                link: null
+            };
+        }
+        
+        // Función para parsear CSV
+        function parseCSV(csvText) {
+            const lines = csvText.split('\n');
+            const result = [];
+            
+            const headers = parseCSVLine(lines[0]).map(h => h.toLowerCase().trim());
+            const textIndex = headers.findIndex(h => h === 'text');
+            const typeIndex = headers.findIndex(h => h === 'type');
+            
+            for (let i = 1; i < lines.length; i++) {
+                const line = lines[i].trim();
+                if (line === '') continue;
+                
+                const values = parseCSVLine(line);
+                
+                const type = typeIndex >= 0 ? values[typeIndex] : '';
+                if (typeIndex >= 0 && type !== 'Quote') continue;
+                
+                const rawText = textIndex >= 0 ? values[textIndex] : '';
+                if (!rawText || !rawText.trim()) continue;
+                
+                const parsed = parseQuoteText(rawText.trim());
+                result.push(parsed);
+            }
+            
+            return result;
+        }
+        
+        // Función para parsear líneas CSV
+        function parseCSVLine(line) {
+            const result = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    result.push(current.trim());
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            
+            result.push(current.trim());
+            return result;
+        }
+        
+        // Función para crear embeds
+        function createSourceEmbed(url) {
+            if (!url) return '';
+            
+            // YouTube
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                const videoId = extractYouTubeId(url);
+                if (videoId) {
+                    return `
+                        <div class="source-embed youtube-embed">
+                            <h4>📺 YouTube Video</h4>
+                            <iframe src="https://www.youtube.com/embed/${videoId}?start=${extractYouTubeTime(url)}" 
+                                frameborder="0" allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Twitter/X
+            if (url.includes('twitter.com') || url.includes('x.com')) {
+                const tweetId = extractTweetId(url);
+                if (tweetId) {
+                    return `
+                        <div class="source-embed twitter-embed">
+                            <h4>🐦 Twitter/X Post</h4>
+                            <blockquote class="twitter-tweet" data-theme="dark">
+                                <a href="${url}"></a>
+                            </blockquote>
+                            <script async src="https://platform.twitter.com/widgets.js"></script>
+                        </div>
+                    `;
+                }
+            }
+            
+            // Web general
+            return `
+                <div class="source-embed">
+                    <h4>🌐 Web Source</h4>
+                    <a href="${url}" target="_blank" rel="noopener" class="web-preview">
+                        <div class="web-icon">🔗</div>
+                        <div>
+                            <div class="web-text">Open Source</div>
+                            <div class="web-url">${url}</div>
+                        </div>
+                    </a>
+                </div>
+            `;
+        }
+        
+        function extractYouTubeId(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|&v=)([^#&?]*).*/;
+            const match = url.match(regExp);
+            return (match && match[2].length === 11) ? match[2] : null;
+        }
+        
+        function extractYouTubeTime(url) {
+            const timeMatch = url.match(/[?&]t=(\d+)/);
+            return timeMatch ? timeMatch[1] : '0';
+        }
+        
+        function extractTweetId(url) {
+            const match = url.match(/status\/(\d+)/);
+            return match ? match[1] : null;
+        }
+        
+        // Función para cargar datos
+        async function loadData() {
+            try {
+                const urls = [
+                    `https://docs.google.com/spreadsheets/d/e/${SHEET_ID}/pub?output=csv&gid=0`,
+                    `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`
+                ];
+                
+                for (const url of urls) {
+                    try {
+                        const response = await fetch(url);
+                        if (response.ok) {
+                            const csvData = await response.text();
+                            const parsedData = parseCSV(csvData);
+                            
+                            if (parsedData.length > 0) {
+                                return parsedData;
+                            }
+                        }
+                    } catch (e) {
+                        continue;
+                    }
+                }
+                
+                return [];
+            } catch (error) {
+                return [];
+            }
+        }
+        
+        function displayQuote(index) {
+            if (quotesData.length === 0) {
+                document.getElementById('quoteContainer').innerHTML = `
+                    <div class="quote-card">
+                        <div class="quote-text">Loading quotes from TBPN database...</div>
+                        <div class="quote-author">— System</div>
+                    </div>
+                `;
+                return;
+            }
+            
+            const quote = quotesData[index];
+            const container = document.getElementById('quoteContainer');
+            
+            const sourceEmbed = quote.link ? createSourceEmbed(quote.link) : '';
+            
+            container.innerHTML = `
+                <div class="quote-card">
+                    <div class="quote-text">${quote.text}</div>
+                    <div class="quote-author">— ${quote.author}</div>
+                </div>
+                ${sourceEmbed}
+            `;
+            
+            // Update navigation
+            document.getElementById('prevBtn').disabled = index === 0;
+            document.getElementById('nextBtn').disabled = index === quotesData.length - 1;
+            document.getElementById('pageInfo').textContent = `${index + 1} / ${quotesData.length}`;
+            
+            // Update stats
+            document.getElementById('totalQuotes').textContent = quotesData.length;
+            document.getElementById('currentQuote').textContent = index + 1;
+        }
+        
+        function nextQuote() {
+            if (currentIndex < quotesData.length - 1) {
+                currentIndex++;
+                displayQuote(currentIndex);
+            }
+        }
+        
+        function previousQuote() {
+            if (currentIndex > 0) {
+                currentIndex--;
+                displayQuote(currentIndex);
+            }
+        }
+        
+        // Keyboard and touch navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowLeft') {
+                previousQuote();
+            } else if (e.key === 'ArrowRight') {
+                nextQuote();
+            }
+        });
+        
+        // Touch gestures for mobile
+        let touchStartX = 0;
+        let touchEndX = 0;
+        
+        document.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+        
+        document.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+        
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+            
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    // Swipe left - next quote
+                    nextQuote();
+                } else {
+                    // Swipe right - previous quote
+                    previousQuote();
+                }
+            }
+        }
+        
+        // Initialize
+        window.addEventListener('load', async function() {
+            quotesData = await loadData();
+            currentIndex = 0;
+            displayQuote(0);
+        });
+    </script>
+</body>
+</html>
